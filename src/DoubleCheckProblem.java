@@ -5,15 +5,14 @@ public class DoubleCheckProblem {
 }
 
 class SingletonExample {
-    private static SingletonExample singletonExample;
+    private volatile static SingletonExample singletonExample;
 
     private SingletonExample() {
-        this.singletonExample = createInstance();
     }
 
-    public static SingletonExample createInstance(){
-        if (singletonExample == null){
-            synchronized (SingletonExample.class){
+    public static SingletonExample createInstance() {
+        if (singletonExample == null) {
+            synchronized (SingletonExample.class) {
                 if (singletonExample == null) {
                     return new SingletonExample();
                 }
